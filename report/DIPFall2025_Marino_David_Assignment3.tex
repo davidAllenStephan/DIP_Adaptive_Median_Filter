@@ -1,0 +1,210 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\maketitle
+\newpage
+\section{Abstract}
+The student (David Marino) analyzes results from Gaussian, median, and a self-implemented adaptive median filter on a set of test images.
+The goal is to improve the students' understanding of how these filters work and the effects they have on noisy images.
+\newpage
+\section{Introduction}
+The student (David Marino) begins by processing a set of similar test images with increasing amounts of noise.
+The differences of these images and the resulting ones processed through the filters are compared by their mean square error to deduce the similarity between the noisy images and the original ones.
+To begin, Gaussian and median filters are applied to the noisy images to understand how these filters serve as a means to denoise noisy images.
+Next, the student implements an adaptive median filter to see the effectivness compared to the previously mentioned Gaussian and median filter.
+\newpage
+\section{Experiments and Results}
+\subsection{Gaussian and Median Filter}
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics[width=\linewidth]{images/Test1.png}
+		\caption{Test Image 1 Original}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics[width=\linewidth]{images/Test1Noise1.png}
+		\caption{Test Image 1 Noise 1}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics[width=\linewidth]{images/Test1Noise2.png}
+		\caption{Test Image 1 Noise 2}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/Test2.png}
+		\caption{Test Image 2 Original}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/Test2Noise2.png}
+		\caption{Test Image 2 Noise 2}
+	\end{subfigure}
+	\caption{Original Images}
+\end{figure}
+\newpage
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_1_blur_2_img.png}
+		\caption{Test Image 1 Noise 1 Blur 2}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_blur_2_img.png}
+		\caption{Test Image 1 Noise 2 Blur 2}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_1_blur_7_img.png}
+		\caption{Test Image 1 Noise 1 Blur 7}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_blur_7_img.png}
+		\caption{Test Image 1 Noise 2 Blur 7}
+	\end{subfigure}
+	\caption{Gaussian Filter}
+\end{figure}
+
+\newpage
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_1_median_7_img.png}
+		\caption{Test Image 1 Noise 1 Median 7}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_1_median_19_img.png}
+		\caption{Test Image 1 Noise 1 Median 19}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_median_7_img.png}
+		\caption{Test Image 1 Noise 2 Median 7}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_median_19_img.png}
+		\caption{Test Image 1 Noise 2 Median 19}
+	\end{subfigure}
+	\caption{Median Filter}
+\end{figure}
+
+\begin{table}[htbp]
+	\centering
+	\small
+	\begin{tabular}{lccccc}
+		\hline
+		            & \multicolumn{5}{c}{MSE}                                                                           \\
+		\cline{2-6}
+		            & \shortstack{Noisy (not                                                                            \\ processed)} & \shortstack{Gaussian \\ Filter \\ sigma=2} & \shortstack{Gaussian \\ Filter \\ sigma=7} & \shortstack{Median \\ Filter (7x7)} & \shortstack{Median Filter \\ (19x19)} \\
+		\hline
+		Test1Noise1 & 3984.7870444444443      & 439.8274777777778  & 1057.0056 & 129.62436666666667 & 576.5919888888889 \\
+		Test1Noise2 & 15838.201977777779      & 2657.9681555555558 & 2700.6626 & 3569.880688888889  & 990.4110888888889 \\
+		\hline
+	\end{tabular}
+	\caption{Gaussian and Median Filter Mean Square Error results}
+\end{table}
+
+\newpage
+\subsection{Adaptive Median Filter}
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_adaptive_7_img.png}
+		\caption{Test Image 1 Noise 2 Adaptive 7}
+	\end{subfigure}\hfill
+	\begin{subfigure}{0.6\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_adaptive_7_plot.png}
+		\caption{Test Image 1 Noise 2 Adaptive 7 Plot}
+	\end{subfigure}\hfill
+	\caption{Adaptive Median - Test 1 - 7x7}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_2_noise_2_adaptive_7_img.png}
+		\caption{Test Image 2 Noise 2 Adaptive 7}
+	\end{subfigure}\hfill
+	\begin{subfigure}{0.6\textwidth}
+		\includegraphics[width=\linewidth]{images/test_2_noise_2_adaptive_7_plot.png}
+		\caption{Test Image 2 Noise 2 Adaptive 7 Plot}
+	\end{subfigure}\hfill
+	\caption{Adaptive Median - Test 2 - 7x7}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_adaptive_19_img.png}
+		\caption{Test Image 1 Noise 2 Adaptive 19}
+	\end{subfigure}\hfill
+	\begin{subfigure}{0.6\textwidth}
+		\includegraphics[width=\linewidth]{images/test_1_noise_2_adaptive_19_plot.png}
+		\caption{Test Image 1 Noise 2 Adaptive 19 Plot}
+	\end{subfigure}\hfill
+	\caption{Adaptive Median - Test 1 - 19x19}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\includegraphics[width=\linewidth]{images/test_2_noise_2_adaptive_19_img.png}
+		\caption{Test Image 2 Noise 2 Adaptive 19}
+	\end{subfigure}\hfill
+	\begin{subfigure}{0.6\textwidth}
+		\includegraphics[width=\linewidth]{images/test_2_noise_2_adaptive_19_plot.png}
+		\caption{Test Image 2 Noise 2 Adaptive 19 Plot}
+	\end{subfigure}\hfill
+	\caption{Adaptive Median - Test 2 - 19x19}
+\end{figure}
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{lcccccc}
+		\hline
+		            & \multicolumn{2}{c}{MSE} & \multicolumn{3}{c}{Processing Time (s)}                           \\
+		\cline{2-3} \cline{4-6}
+		            & Noisy                   & \shortstack{AM                                                    \\ 7x7} & \shortstack{AM \\ 19x19} & \shortstack{AM \\ 7x7} & \shortstack{AM \\ 19x19} \\
+		\hline
+		Test1Noise2 & 15838.20                & 2409.16                                 & 2192.01 & 2.28  & 2.87  \\
+		Test2Noise2 & 15386.01                & 2436.10                                 & 1426.76 & 25.94 & 27.66 \\
+		\hline
+	\end{tabular}
+	\caption{Adaptive Median (AM) filter results with window sizes from 3x3 to Smax}
+\end{table}
+\newpage
+\section{Conclusions}
+The results displayed in section 3.1, Gaussian and Median filters, show reduced noise as communicated through the MSE values, and visually, the outputs appear less noisy.
+The Gaussian and Median filters were both effective in reducing the salt and pepper noise.
+Gaussian works by blurring the image with a standard Gaussian distribution.
+The Median filter results in a similar effect by taking the median values of a region around each pixel.
+However, not all window sizes were effective, and each seemed to have a maximum effective size given the amount of noise present.
+For instance, taking a look at the Median filter results in Table 1, it's clear that MSE actually increased (more noisy) when the window size increased for test image 1; however, for test image 2, the MSE continued to decrease as the window size increased.
+In the case of the Gaussian filter, the results also showed that they results were not completely ideal.
+Comparing the MSE between applying a Gaussian filter of sigma 2 and 7, while it is less than the original MSE present in the noisy images, the MSE increases when increasing the sigma for both images.
+This is important because it means we need to take into account the actual amount of noise present when applying these filters to find an effective window or sigma value.
+Just continuously increasing the size of the window or increasing the amount of sigma will not result in a less noisy result.
+It's also important to take into account the complexity of the image.
+When taking a look at the results from the Adaptive Median filter in section 3.2, Adaptive Median filter, the test 1 image is considerably less complex than the test 2 image.
+While one might think a less complex image would result in more effective denoising, it actually did the opposite.
+The test 2 image MSE decreased significantly from a 7x7 window size to a 19x19 size, while the test 1 image decreased comparably less, even though it's less complex.
+It's also important to account for the fact that test image 2 was much larger than test image 1, which explains the increased processing times.
+With more pixels available to apply the Adaptive Median filter, it would follow that a more significant decrease in MSE can be seen in test image 2 than in test image 2.
+What this has revealed is that when applying Gaussian, Median, or Adaptive Median filters, it is important to take into account the complexity, present noise, and the size of the image and not associate larger window or sigma sizes with better results.
+These factors are limiters that bound the effectiveness of the window size and sigma values.
+\newpage
+\section{References}
+\begin{itemize}
+	\item Dr. Filiz Bunyak\\
+	      \textit{Non-Linear Spatial Filtering}
+	\item OpenCV documentation\\
+	      \textit{https://docs.opencv.org/4.x/}.
+	\item PyPlot documentation\\
+	      \textit{https://matplotlib.org/stable/tutorials/pyplot.html}
+	\item Python documentation\\
+	      \textit{https://docs.python.org/3/}
+	\item JupyterLab documentation\\
+	      \textit{https://jupyterlab.readthedocs.io/en/latest/}
+	\item NumPy documentation\\
+	      \textit{https://numpy.org/doc/}
+\end{itemize}
+\end{document}
